@@ -44,7 +44,7 @@ void prompt(char **argv, char **env)
 				wait(NULL);
 		}
 		else
-			printf("%s: No such file or directory", argv[0]);
+			printf("%s: No such file or directory\n", argv[0]);
 	}
 	free(line);
 	exit(EXIT_SUCCESS);
