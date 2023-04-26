@@ -6,8 +6,10 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <sys/wait.h>
+#include <string.h>
 
 #define PROMPT "#cisfun$ "
+#define MAX_CMD 10
 
 int mul(int num1, int num2);
 void prompt(char **argv, char **env);
