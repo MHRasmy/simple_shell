@@ -15,7 +15,8 @@ void prompt(char **argv, char **env)
 
 	while (1)
 	{
-		printf(PROMPT);
+		if (isatty(STDIN_FILENO))
+			printf(PROMPT);
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 		{
