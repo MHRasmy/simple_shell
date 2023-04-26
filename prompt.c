@@ -9,7 +9,8 @@
 
 void prompt(char **argv, char **env)
 {
-	char *line, *av[] = {NULL, NULL};
+	char *line, *av[MAX_CMD], *delim = " ";
+	int n;
 	ssize_t nread;
 	size_t len = 0;
 
@@ -27,14 +28,17 @@ void prompt(char **argv, char **env)
 		{
 			line[nread - 1] = '\0';
 		}
-		av[0] = line;
-		if (access(line, X_OK) == 0)
+		n = 0;
+		av[n] = strtok(line, delim);
+		while (av[n])
+			av[++n] = strtok(NULL, delim);
+		if (access(av[0], X_OK) == 0)
 		{
 			pid_t pid = fork();
 
 			if (pid == 0)
 			{
-				execve(line, av, env);
+				execve(av[0], av, env);
 			}
 			else if (pid < 0)
 			{
