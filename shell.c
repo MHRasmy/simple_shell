@@ -1,76 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
+#include <sys/time.h>
 #include <sys/wait.h>
+
+#define PROMPT "#cisfun$ "
+
 
 /**
  * main - Entry point
- * Return : (0) for success, (1) for failure
+ * Return: Always EXIT_SUCCESS
  */
 
 int main(void)
 {
-	char *cmd = NULL, *token = NULL;
-	size_t buffersize = 0;
-	char **args = NULL;
-	char *delim = " ";
-	//char *word = NULL;
-	int n = 1;
-	int exeval;
-	int i;
+	char *line, **args;
+	ssize_t nread;
+	size_t len = 0;
 
-	pid_t pid;
-
-	args = malloc(sizeof(char *));
-
-	if (args == NULL)
+	while (1)
 	{
-		return (1);
-	}
+		printf(PROMPT);
+		nread = getline(&line, &len, stdin);
+		if (nread == -1)
+		{
+			printf("\n");
+			break;
+		}
+		if (line[nread - 1] == '\n')
+		{
+			line[nread - 1] = '\0';
+		}
+		if (access(line, X_OK) == 0)
+		{
+			pid_t pid = fork();
 
-	printf("$ ");
-
-	if (getline(&cmd, &buffersize, stdin) == -1)
-	{
-		return (1);
-	}
-
-	args[n - 1] = strtok(cmd, delim);
-	while (args[n-1] != NULL)
-	{
-		args = realloc(args, ++n);
-		args[n - 1] = strtok(NULL, delim);
-	}
-
-	pid = fork();
-
-	if (pid == 0)
-	{
-		/* this is the child process */
-		token = args[0];
-		//if (strcmp(token, "betty") == 0)
-		//{
-			//args[0] = "/bin/ls";
-			exeval = execve(args[0], args, NULL);
-			if (exeval == -1)
+			if (pid == 0)
 			{
-				perror("./shell: No such file or directory");
-				exit(1);
+				args = malloc(2 * sizeof(char *));
+				args[0] = line;
+				args[1] = NULL;
+				execve(line, args, NULL);
 			}
-		//}
+			else if (pid < 0)
+				perror("fork");
+			else
+				wait(NULL);
+		}
+		else
+			printf("./shell: No such file or directory");
 	}
-	else if (pid < 0)
-	{
-		return (1);
-	}
-	else
-	{
-		/* this is the parent process */
-		wait(NULL);
-	}
-
-	free(args);
-	return (0);
+	free(line);
+	exit(EXIT_SUCCESS);
 }
