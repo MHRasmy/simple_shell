@@ -1,55 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <sys/wait.h>
-
-#define PROMPT "#cisfun$ "
-
+#include "shell.h"
 
 /**
  * main - Entry point
+ * @argc: number of arguments passed to the program
+ * @argv: arguments vector
+ * @env: string array passed as enviroment
  * Return: Always EXIT_SUCCESS
  */
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	char *line, **args;
-	ssize_t nread;
-	size_t len = 0;
-
-	while (1)
-	{
-		printf(PROMPT);
-		nread = getline(&line, &len, stdin);
-		if (nread == -1)
-		{
-			printf("\n");
-			break;
-		}
-		if (line[nread - 1] == '\n')
-		{
-			line[nread - 1] = '\0';
-		}
-		if (access(line, X_OK) == 0)
-		{
-			pid_t pid = fork();
-
-			if (pid == 0)
-			{
-				args = malloc(2 * sizeof(char *));
-				args[0] = line;
-				args[1] = NULL;
-				execve(line, args, NULL);
-			}
-			else if (pid < 0)
-				perror("fork");
-			else
-				wait(NULL);
-		}
-		else
-			printf("./shell: No such file or directory");
-	}
-	free(line);
-	exit(EXIT_SUCCESS);
+	if (argc == 1)
+		prompt(argv, env);
+	return (EXIT_SUCCESS);
 }
