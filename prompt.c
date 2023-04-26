@@ -1,12 +1,10 @@
 #include "shell.h"
-
 /**
  * prompt - interpret commands without arguments
  * @argv: arguments vector
  * @env: string array passed as environment
  * Return: void
  */
-
 void prompt(char **argv, char **env)
 {
 	char *line, *av[MAX_CMD], *delim = " ";
@@ -25,9 +23,7 @@ void prompt(char **argv, char **env)
 			exit(EXIT_FAILURE);
 		}
 		if (line[nread - 1] == '\n')
-		{
 			line[nread - 1] = '\0';
-		}
 		n = 0;
 		av[n] = strtok(line, delim);
 		while (av[n])
@@ -37,9 +33,7 @@ void prompt(char **argv, char **env)
 			pid_t pid = fork();
 
 			if (pid == 0)
-			{
 				execve(av[0], av, env);
-			}
 			else if (pid < 0)
 			{
 				free(line);
