@@ -5,7 +5,7 @@
  * @env: string array passed as environment
  * Return: void
  */
-void prompt(char **argv, char **env)
+void prompt(char **argv __attribute__((unused)), char **env)
 {
 	char *line, *av[MAX_CMD], *delim = " ";
 	int n;
@@ -15,7 +15,7 @@ void prompt(char **argv, char **env)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf(PROMPT);
+			write(STDOUT_FILENO, PROMPT, 9);
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 		{
@@ -43,7 +43,7 @@ void prompt(char **argv, char **env)
 				wait(NULL);
 		}
 		else
-			printf("%s: No such file or directory\n", argv[0]);
+			perror("ERROR");
 		free(line);
 	}
 }
