@@ -25,7 +25,10 @@ void prompt(char **argv __attribute__((unused)), char **env)
 		args = parse_input(line);
 		if (strcmp(args[0], "exit") == 0)
 			exit_shell(args);
-		execute_command(args, env);
+		else if (strcmp(args[0], "env") == 0)
+			env_shell(env);
+		else
+			execute_command(args, env);
 
 		free(args);
 	}
@@ -42,4 +45,20 @@ void exit_shell(char **av)
 {
 	free(av);
 	exit(EXIT_SUCCESS);
+}
+
+/**
+ * env_shell - print the current environment
+ * @env: Array of environment variables
+ * Return: Nothing
+ */
+void env_shell(char **env)
+{
+    int i = 0;
+
+    while (env[i] != NULL)
+    {
+        printf("%s\n", env[i]);
+        i++;
+    }
 }
