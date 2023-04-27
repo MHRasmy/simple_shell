@@ -20,7 +20,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 		if (getline(&line, &len, stdin) == -1)
 		{
 			if (is_terminal)
-                                perror("ERROR");
+				perror("ERROR");
 			break;
 		}
 
