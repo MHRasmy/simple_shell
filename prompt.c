@@ -25,8 +25,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 		args = parse_input(line);
 		if (strcmp(args[0], "exit") == 0)
 			exit_shell(args);
-		if (execute_command(args, env))
-			break;
+		execute_command(args, env);
 
 		free(args);
 	}
