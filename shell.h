@@ -16,5 +16,6 @@ void prompt(char **argv, char **env);
 char **parse_input(char *line);
 int execute_command(char **args, char **env);
 void exit_shell(char **av);
+void env_shell(char **env);
 
 #endif
