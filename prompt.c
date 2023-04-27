@@ -17,7 +17,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 			printf("%s", PROMPT);
 
 		if (getline(&line, &len, stdin) == -1)
-			break;
+			perror("ERROR");
 
 		if (line[strlen(line) - 1] == '\n')
 			line[strlen(line) - 1] = '\0';
