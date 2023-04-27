@@ -1,49 +1,46 @@
 #include "shell.h"
+
 /**
- * prompt - interpret commands without arguments
+ * prompt - function to interpret commands without arguments
  * @argv: arguments vector
  * @env: string array passed as environment
  * Return: void
  */
 void prompt(char **argv __attribute__((unused)), char **env)
 {
-	char *line, *av[MAX_CMD], *delim = " ";
-	int n;
-	ssize_t nread;
+	char *line = NULL, **args;
 	size_t len = 0;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, PROMPT, 9);
-		nread = getline(&line, &len, stdin);
-		if (nread == -1)
-		{
-			free(line);
-			exit(EXIT_FAILURE);
-		}
-		if (line[nread - 1] == '\n')
-			line[nread - 1] = '\0';
-		n = 0;
-		av[n] = strtok(line, delim);
-		while (av[n])
-			av[++n] = strtok(NULL, delim);
-		if (access(av[0], X_OK) == 0)
-		{
-			pid_t pid = fork();
+			printf("%s", PROMPT);
 
-			if (pid == 0)
-				execve(av[0], av, env);
-			else if (pid < 0)
-			{
-				free(line);
-				exit(EXIT_FAILURE);
-			}
-			else
-				wait(NULL);
-		}
-		else
-			perror("ERROR");
-		free(line);
+		if (getline(&line, &len, stdin) == -1)
+			break;
+
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
+
+		args = parse_input(line);
+		if (strcmp(args[0], "exit") == 0)
+			exit_shell(args);
+		if (execute_command(args, env))
+			break;
+
+		free(args);
 	}
+
+	free(line);
+}
+
+/**
+ * exit_shell - Exit the shell
+ * @av: Array of arguments
+ * Return: Nothing
+ */
+void exit_shell(char **av)
+{
+	free(av);
+	exit(EXIT_SUCCESS);
 }
