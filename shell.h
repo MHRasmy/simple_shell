@@ -13,5 +13,8 @@
 
 int mul(int num1, int num2);
 void prompt(char **argv, char **env);
+char **parse_input(char *line);
+int execute_command(char **args, char **env);
+void exit_shell(char **av);
 
 #endif
