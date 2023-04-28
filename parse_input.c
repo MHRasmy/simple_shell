@@ -45,13 +45,37 @@ char** tokenize(char *line)
  */
 char* read_line()
 {
-	char *line = NULL;
-	size_t buf = 0;
+	int capacity = 1024;
+	int pos = 0;
+	char *buffer = (char *)malloc(sizeof(char) * capacity);
+	int ch;
 
-	if (getline(&line, &buf, stdin) == -1)
-	{
-		free(line);
+	if (buffer == NULL) {
+		_perror("Allocation error\n");
 		exit(1);
 	}
-	return line;
+
+	while (1) {
+		ch = getchar();
+		if (ch == EOF || ch == '\n')
+		{
+			buffer[pos] = '\0';
+			return buffer;
+		} else {
+			buffer[pos] = ch;
+		}
+		pos++;
+
+		if (pos >= capacity)
+		{
+			capacity += 1024;
+			buffer = (char *)realloc(buffer, capacity);
+
+			if (buffer == NULL)
+			{
+				_perror("Rellocation error\n");
+				exit(1);
+			}
+		}
+	}
 }
