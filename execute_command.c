@@ -6,11 +6,12 @@
  * @env: environment variables
  * Return: 0 on success and 1 on failure
  */
-void execute_command(char **args, char **env)
+void execute_command(char **args, char **env __attribute__((unused)))
 {
+	int i = 0;
 	pid_t pid;
 
-	for (int i = 0; i < builtins_size(); i++)
+	for (i = 0; i < builtins_size(); i++)
 	{
 		if (_strcmp(args[0], builtins[i].name) == 0)
 		{

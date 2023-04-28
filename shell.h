@@ -12,7 +12,8 @@
 #define PROMPT "#cisfun$ "
 #define MAX_CMD 10
 /**
- * struct builtin - struct to hold built-in command name and function pointer
+ * struct builtin - struct to hold built-in command
+ * name and function pointer
  * @name: name of the built-in command
  * @func: pointer to the function that implements the built-in command
  */
@@ -22,6 +23,10 @@ typedef struct builtin
     void (*func)(char **args);
 } builtin_t;
 
+/* initializes an array of built-in commands */
+/*
+builtin_t *init_builtins(void);
+*/
 /* builtins array */
 extern builtin_t builtins[];
 

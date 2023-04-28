@@ -9,7 +9,7 @@ char** tokenize(char *line)
 {
 	int len = 0;
 	int capacity = 15;
-	char **tokens = malloc(capacity * sizeof(char*));
+	char *delim, *token, **tokens = malloc(capacity * sizeof(char*));
 
 	if (!tokens)
 	{
@@ -17,8 +17,8 @@ char** tokenize(char *line)
 		exit(1);
 	}
 
-	char *delim = " \t\r\n";
-	char *token = strtok(line, delim);
+	delim = " \t\r\n";
+	token = strtok(line, delim);
 
 	while (token != NULL)
 	{
