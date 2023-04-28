@@ -6,7 +6,7 @@
  * @env: environment variables
  * Return: 0 on success and 1 on failure
  */
-void execute_command(char **args, char **env __attribute__((unused)))
+void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 {
 	int i = 0;
 	pid_t pid;
@@ -26,7 +26,8 @@ void execute_command(char **args, char **env __attribute__((unused)))
 	if (pid == 0)
 	{
 		execve(args[0], args, NULL);
-		_perror("failed to execute command\n");
+		_perror(arg);
+		_perror(": No such file or directory\n");
 		exit(1);
 	}
 	else if (pid > 0)
