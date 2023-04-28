@@ -11,6 +11,12 @@ char** tokenize(char *line)
 	int capacity = 15;
 	char **tokens = malloc(capacity * sizeof(char*));
 
+	if (!tokens)
+	{
+		_perror("ERROR token malloc failed");
+		exit(1);
+	}
+
 	char *delim = " \t\r\n";
 	char *token = strtok(line, delim);
 
@@ -43,6 +49,10 @@ char* read_line()
 	size_t buf = 0;
 
 	if (getline(&line, &buf, stdin) == -1)
+	{
+		free(line);
 		_perror(err);
+		exit(1);
+	}
 	return line;
 }
