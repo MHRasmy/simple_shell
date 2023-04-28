@@ -11,7 +11,8 @@ void prompt(char **argv __attribute__((unused)), char **env)
 	char *line, **tokens;
 	while (1)
 	{
-		_print(PROMPT);
+		if (isatty(STDIN_FILENO))
+			_print(PROMPT);
 		line = read_line();
 		tokens = tokenize(line);
 
