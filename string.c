@@ -1,29 +1,5 @@
 #include "shell.h"
 
-char** tokenize(char *line)
-{
-	int len = 0;
-	int capacity = 15;
-	char **tokens = malloc(capacity * sizeof(char*));
-
-	char *delim = " \t\r\n";
-	char *token = strtok(line, delim;
-
-	while (token != NULL) {
-		tokens[len] = token;
-		len++;
-
-		if (len >= capacity) {
-			capacity = (int) (capacity * 1.5);
-			tokens = realloc(tokens, capacity * sizeof(char*));
-		}
-
-		token = strtok(NULL, delim);
-	}
-
-	tokens[len] = NULL;
-	return tokens;
-}
 
 /**
  * _strlen - returns the length of a string
