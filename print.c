@@ -10,3 +10,8 @@ int _print(char *string)
 {
 	return (write(STDOUT_FILENO, string, strlen(string)));
 }
+
+int _perror(char *err)
+{
+	return (write(STDERR_FILENO, err, _strlen(err)));
+}
