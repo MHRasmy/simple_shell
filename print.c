@@ -8,7 +8,7 @@
  */
 int _print(char *string)
 {
-	return (write(STDOUT_FILENO, string, strlen(string)));
+	return (write(STDOUT_FILENO, string, _strlen(string)));
 }
 
 int _perror(char *err)

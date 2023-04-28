@@ -12,7 +12,7 @@ void execute_command(char **args, char **env)
 
 	for (int i = 0; i < builtins_size(); i++)
 	{
-		if (strcmp(args[0], builtins[i].name) == 0)
+		if (_strcmp(args[0], builtins[i].name) == 0)
 		{
 			builtins[i].func(args);
 			return;
@@ -24,7 +24,7 @@ void execute_command(char **args, char **env)
 
 	if (pid == 0)
 	{
-		execvp(args[0], args);
+		execve(args[0], args, NULL);
 		_perror("failed to execute command\n");
 		exit(1);
 	}
