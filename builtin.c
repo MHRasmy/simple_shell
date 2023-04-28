@@ -15,8 +15,7 @@ int builtins_size()
 
 void my_exit(char **args)
 {
-	free(args);
-	exit(EXIT_SUCCESS);
+	exit(0);
 }
 
 void _cd(char **args)
