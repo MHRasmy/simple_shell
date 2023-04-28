@@ -7,6 +7,7 @@
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define PROMPT "#cisfun$ "
 #define MAX_CMD 10
@@ -32,12 +33,9 @@ void _cd(char **args);
 /* functions */
 int mul(int num1, int num2);
 void prompt(char **argv, char **env);
-int execute_command(char **args, char **env);
-void exit_shell(char **av);
-void env_shell(char **env);
+void execute_command(char **args, char **env);
 
 /* parsing input */
-char **parse_input(char *line);
 char** tokenize(char *line);
 char* read_line();
 

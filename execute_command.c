@@ -6,7 +6,7 @@
  * @env: environment variables
  * Return: 0 on success and 1 on failure
  */
-int execute_command(char **args, char **env)
+void execute_command(char **args, char **env)
 {
 	pid_t pid;
 
@@ -15,25 +15,23 @@ int execute_command(char **args, char **env)
 		if (strcmp(args[0], builtins[i].name) == 0)
 		{
 			builtins[i].func(args);
-			return (0);
+			return;
 		}
 	}
 
 	pid = fork();
 
-	if (pid == -1)
-	{
-		_perror("failed to fork\n");
-		return (1);
-	}
 
 	if (pid == 0)
 	{
-		execve(args[0], args, env);
+		execvp(args[0], args);
 		_perror("failed to execute command\n");
+		exit(1);
 	}
-	else
+	else if (pid > 0)
+	{
 		wait(NULL);
-
-	return (0);
+	}
+	else if (pid < 0)
+		_perror("failed to fork\n");
 }
