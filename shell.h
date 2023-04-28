@@ -17,5 +17,19 @@ char **parse_input(char *line);
 int execute_command(char **args, char **env);
 void exit_shell(char **av);
 void env_shell(char **env);
+char* read_line();
 
+
+/* string functions */
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+int _puts(char *str);
+
+/* print functions */
+int _print(char *string);
+int _perror(char *err);
+
+/* free functions */
+void _free(char **buf);
+void free_list(Node *head);
 #endif
