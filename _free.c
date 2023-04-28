@@ -17,19 +17,3 @@ void _free(char **buf)
 		free(buf);
 	}
 }
-
-/**
- * free_list - free a linked list
- * @head: pointer to the head node
- *
- * Return: void
- */
-void free_list(Node *head)
-{
-    while (head != NULL)
-    {
-        Node *temp = head;
-        head = head->next;
-        free(temp);
-    }
-}

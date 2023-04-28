@@ -10,15 +10,36 @@
 
 #define PROMPT "#cisfun$ "
 #define MAX_CMD 10
+/**
+ * struct builtin - struct to hold built-in command name and function pointer
+ * @name: name of the built-in command
+ * @func: pointer to the function that implements the built-in command
+ */
+typedef struct builtin
+{
+    char *name;
+    void (*func)(char **args);
+} builtin_t;
 
+/* builtins array */
+extern builtin_t builtins[];
+
+/* buitlins functions */
+int builtins_size();
+void my_exit(char **args);
+void _cd(char **args);
+
+/* functions */
 int mul(int num1, int num2);
 void prompt(char **argv, char **env);
-char **parse_input(char *line);
 int execute_command(char **args, char **env);
 void exit_shell(char **av);
 void env_shell(char **env);
-char* read_line();
 
+/* parsing input */
+char **parse_input(char *line);
+char** tokenize(char *line);
+char* read_line();
 
 /* string functions */
 int _strlen(char *s);
@@ -31,5 +52,4 @@ int _perror(char *err);
 
 /* free functions */
 void _free(char **buf);
-void free_list(Node *head);
 #endif
