@@ -8,6 +8,19 @@
  */
 void prompt(char **argv __attribute__((unused)), char **env)
 {
+	char *line, **tokens;
+	while (1)
+	{
+		line = read_line();
+		tokens = tokenize();
+
+		if (tokens[0] != NULL)
+			execute_command(tokens, env);
+
+		_free(tokens);
+		free(line);
+	}
+	/*
 	char *line = NULL, **args;
 	size_t len = 0;
 	int is_terminal = isatty(STDIN_FILENO);
@@ -39,6 +52,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 		free(line);
 		line = NULL;
 	}
+	*/
 }
 
 /**

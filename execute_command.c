@@ -8,26 +8,18 @@
  */
 int execute_command(char **args, char **env)
 {
-	pid_t pid;
-
-	if (access(args[0], F_OK) == -1)
-	{
-		perror("command not found");
-		return (1);
-	}
-
-	pid = fork();
+	pid_t pid = fork();
 
 	if (pid == -1)
 	{
-		perror("failed to fork");
+		_perror("failed to fork");
 		return (1);
 	}
 
 	if (pid == 0)
 	{
-		if (execve(args[0], args, env) == -1)
-			perror("failed to execute command");
+		execve(args[0], args, env);
+		_perror("failed to execute command");
 	}
 	else
 		wait(NULL);

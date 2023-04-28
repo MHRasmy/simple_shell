@@ -1,5 +1,14 @@
 #include "shell.h"
 
+char* read_line()
+{
+	char *line = NULL, *err = "getline ERROR";
+	size_t buf = 0;
+
+	if (getline(&line, &buf, stdin) == -1)
+		_perror(err);
+	return line;
+}
 /**
  * parse_input - function to parse input
  * @line: input to be parsed
