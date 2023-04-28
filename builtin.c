@@ -1,20 +1,28 @@
 #include "shell.h"
 
 /**
- * builtins - array of built-in commands
+ * init_builtins - initializes an array of built-in commands
+ *
+ * Return: the initialized array of built-in commands
  */
-builtin_t builtins[] = {
-    {"exit", my_exit},
-    {"cd", _cd},
-};
+/*builtin_t *init_builtins(void)
+{
+*/
+	builtin_t builtins[] = {
+		{"exit", my_exit},
+		{"cd", _cd},
+	};
+/*	return builtins;
+//}*/
 
 int builtins_size()
 {
-    return sizeof(builtins) / sizeof(struct builtin);
+	return sizeof(builtins) / sizeof(struct builtin);
 }
 
 void my_exit(char **args)
 {
+	free(args);
 	exit(0);
 }
 
