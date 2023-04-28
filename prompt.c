@@ -16,7 +16,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 		tokens = tokenize(line);
 
 		if (tokens[0] != NULL)
-			execute_command(tokens, env);
+			execute_command(tokens, env, argv[0]);
 
 		free(tokens);
 		free(line);
