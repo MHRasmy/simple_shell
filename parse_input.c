@@ -45,13 +45,12 @@ char** tokenize(char *line)
  */
 char* read_line()
 {
-	char *line = NULL, *err = "getline ERROR\n";
+	char *line = NULL;
 	size_t buf = 0;
 
 	if (getline(&line, &buf, stdin) == -1)
 	{
 		free(line);
-		_perror(err);
 		exit(1);
 	}
 	return line;
