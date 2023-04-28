@@ -25,7 +25,7 @@ void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 
 	if (pid == 0)
 	{
-		execve(args[0], args, NULL);
+		execvp(args[0], args);
 		_perror(arg);
 		_perror(": No such file or directory\n");
 		exit(1);
