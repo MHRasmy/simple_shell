@@ -5,7 +5,7 @@
  */
 void my_exit(void)
 {
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 /**
@@ -15,11 +15,13 @@ void my_exit(void)
  */
 void _cd(char **args)
 {
+	char *home;
+
 	if (!args[0])
 		_perror("cd: missing argument\n");
 	else if (!args[1])
 	{
-		char *home = getenv("HOME");
+		home = getenv("HOME");
 		if (chdir(home) != 0)
 			_perror("cd: No such file or directory\n");
 	}

@@ -3,36 +3,34 @@
 /**
  * run_commands_from_file - execute command from a file
  * @filename: pointer to string of file name
+ * @argv: @argv: array string of arguments
  * Return: void
  */
 void run_commands_from_file(const char *filename, char **argv)
 {
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t nread;
+	char line[MAX_LINE_LENGTH];
 	FILE *fp = fopen(filename, "r");
 
 	if (!fp)
 	{
-		perror("fopen");
-		exit(EXIT_FAILURE);
+		_perror(argv[0]);
+		_perror(": 0: Can't open");
+		_perror("\n");
+		exit(127);
 	}
 
-	while ((nread = getline(&line, &len, fp)) != -1)
+	while (fgets(line, MAX_LINE_LENGTH, fp) != NULL)
 	{
 		file_prompt(line, argv);
-		free(line);
-		line = NULL;
-		len = 0;
 	}
 
-	free(line);
 	fclose(fp);
 }
 
 /**
- * prompt - function to interpret commands without arguments
+ * file_prompt - function to interpret commands without arguments
  * @line: command line
+ * @argv: array string of arguments
  * Return: void
  */
 void file_prompt(char *line, char **argv)
@@ -68,7 +66,7 @@ void file_prompt(char *line, char **argv)
 		if (strcmp(tokens[0], "exit") == 0)
 		{
 			free(tokens);
-			return;
+			my_exit();
 		}
 		execute_command(tokens, argv[0]);
 	}
