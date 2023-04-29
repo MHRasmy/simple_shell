@@ -8,22 +8,26 @@
  */
 void prompt(char **argv __attribute__((unused)), char **env)
 {
-	char *line, **tokens;
+	char line[INPUT_LEN], **tokens;
+	int is_terminal = isatty(STDIN_FILENO);
+
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
+		if (is_terminal)
 			_print(PROMPT);
-		line = read_line();
+		if (fgets(line, INPUT_LEN, stdin) == NULL)
+			break;
 		tokens = tokenize(line);
 
 		if (tokens[0] != NULL)
 		{
 			if (strcmp(tokens[0], "env") == 0)
-				env_shell(env);
+				env_shell();
+			else if (strcmp(tokens[0], "exit") == 0)
+				return;
 			else
 				execute_command(tokens, env, argv[0]);
 		}
 		free(tokens);
-		free(line);
 	}
 }

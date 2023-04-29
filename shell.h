@@ -12,6 +12,8 @@
 #define PROMPT "#cisfun$ "
 #define MAX_CMD 10
 #define MAX_PATH_LEN 1024
+#define INPUT_LEN 1024
+extern char **environ;
 
 /**
  * struct builtin - struct to hold built-in command
@@ -34,9 +36,9 @@ extern builtin_t builtins[];
 
 /* buitlins functions */
 int builtins_size();
-void my_exit(char **args);
+void my_exit(void);
 void _cd(char **args);
-void env_shell(char **env);
+void env_shell(void);
 
 /* executing functions */
 int mul(int num1, int num2);
