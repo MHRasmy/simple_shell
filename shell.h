@@ -13,7 +13,6 @@
 #define MAX_CMD 10
 #define MAX_PATH_LEN 1024
 #define INPUT_LEN 1024
-extern char **environ;
 
 /**
  * struct builtin - struct to hold built-in command

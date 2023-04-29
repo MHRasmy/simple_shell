@@ -28,6 +28,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 			else
 				execute_command(tokens, env, argv[0]);
 		}
+		free(line);
 		free(tokens);
 	}
 }

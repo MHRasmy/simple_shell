@@ -3,27 +3,26 @@
 /**
  * init_builtins - initializes an array of built-in commands
  *
- * Return: the initialized array of built-in commands
+ * Return: the size
  */
-/*builtin_t *init_builtins(void)
-  {
-  */
-builtin_t builtins[] = {
-	{"cd", _cd},
-};
-/*	return builtins;
-//}*/
-
 int builtins_size()
 {
 	return sizeof(builtins) / sizeof(struct builtin);
 }
 
+/**
+ * my_exit - exit
+ */
 void my_exit(void)
 {
 	exit(0);
 }
 
+/**
+ * _cd - changes the current working directory
+ * @args: An array of strings containing the destination directory
+ * Return: void
+ */
 void _cd(char **args)
 {
 	if (!args[0])
@@ -42,6 +41,7 @@ void _cd(char **args)
  */
 void env_shell(void)
 {
+	char **environ;
 	int i = 0;
 
 	while (environ[i] != NULL)
