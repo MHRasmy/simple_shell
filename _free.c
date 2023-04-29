@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * freeav - free buffer array
+ * _free - free buffer array
  * @buf: pointer to array of strings
  *
  * Return: void

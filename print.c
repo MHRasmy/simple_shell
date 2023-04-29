@@ -12,7 +12,7 @@ int _print(char *string)
 }
 /**
  * _perror - writes a string in the standar error
- * @string: pointer to string
+ * @err: pointer to string
  * Return: no. bytes writen or .
  * On error, -1 is returned, and errno is set appropriately.
  */
