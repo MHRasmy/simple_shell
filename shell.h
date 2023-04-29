@@ -60,4 +60,8 @@ int _perror(char *err);
 /* free functions */
 void _free(char **buf);
 char* search_path(char *filename);
+/* enviroment var */
+int set_env(char *name, char *value);
+int unset_env(char *name);
+
 #endif

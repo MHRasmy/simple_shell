@@ -22,6 +22,35 @@ void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 		}
 	}
 
+	if (strcmp(args[0], "setenv") == 0)
+	{
+		if (args[1] == NULL || args[2] == NULL)
+		{
+			fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
+			exit(1);
+		}
+		if (set_env(args[1], args[2]) == -1)
+		{
+			fprintf(stderr, "Failed to set environment variable\n");
+			exit(1);
+		}
+		return;
+	}
+	else if (strcmp(args[0], "unsetenv") == 0)
+	{
+		if (args[1] == NULL)
+		{
+			fprintf(stderr, "Usage: unsetenv VARIABLE\n");
+			exit(1);
+		}
+		if (unset_env(args[1]) == -1)
+		{
+			fprintf(stderr, "Failed to unset environment variable\n");
+			exit(1);
+		}
+		return;
+	}
+
 	pid = fork();
 
 	path = search_path(args[0]);
