@@ -24,19 +24,14 @@ extern char **environ;
  */
 typedef struct builtin
 {
-    char *name;
-    void (*func)(char **args);
+	char *name;
+	void (*func)(char **args);
 } builtin_t;
 
-/* initializes an array of built-in commands */
-/*
-builtin_t *init_builtins(void);
-*/
 /* builtins array */
 extern builtin_t builtins[];
 
 /* buitlins functions */
-int builtins_size();
 void my_exit(void);
 void _cd(char **args);
 void env_shell(void);
@@ -47,8 +42,8 @@ void prompt(char **argv, char **env);
 void execute_command(char **args, char **env, char *arg);
 
 /* parsing input */
-char** tokenize(char *line);
-char* read_line();
+char **tokenize(char *line);
+char *read_line();
 
 /* string functions */
 int _strlen(char *s);
@@ -62,7 +57,7 @@ int _perror(char *err);
 
 /* free functions */
 void _free(char **buf);
-char* search_path(char *filename);
+char *search_path(char *filename);
 /* enviroment var */
 int set_env(char *name, char *value);
 int unset_env(char *name);
