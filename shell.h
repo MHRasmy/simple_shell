@@ -39,7 +39,7 @@ void env_shell(void);
 /* executing functions */
 int mul(int num1, int num2);
 void prompt(char **argv, char **env);
-void execute_command(char **args, char **env, char *arg);
+void execute_command(char **args, char *arg);
 
 /* parsing input */
 char **tokenize(char *line);
