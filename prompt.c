@@ -26,8 +26,11 @@ void prompt(char **argv __attribute__((unused)))
 				if_quote = !if_quote;
 			else if (*l == '#' && prev != '\\' && !if_quote)
 			{
-				cmt = l;
-				break;
+				if (prev == ' ')
+				{
+					cmt = l;
+					break;
+				}
 			}
 			prev = *l;
 			l++;
