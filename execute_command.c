@@ -26,7 +26,7 @@ void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 
 	if (pid == 0)
 	{
-		if (execvp(args[0], args) < 0)
+		if (execve(args[0], args, env) < 0)
 		{
 			_perror(arg);
 			_perror(": No such file or directory\n");
