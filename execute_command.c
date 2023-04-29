@@ -7,11 +7,10 @@
  * @arg: pointer to the name of the program
  * Return: 0 on success and 1 on failure
  */
-void execute_command(char **args, char **env, char *arg)
+void execute_command(char **args, char *arg)
 {
 	int status;
 	pid_t pid;
-	char *path;
 
 	if (_strcmp(args[0], "cd") == 0)
 	{
@@ -24,24 +23,19 @@ void execute_command(char **args, char **env, char *arg)
 		return;
 	}
 	pid = fork();
-	path = search_path(args[0]);
-	if (access(path, X_OK) == 0)
+	if (pid == 0)
 	{
-		if (pid == 0)
+		if (execvp(args[0], args) < 0)
 		{
-			if (execve(path, args, env) < 0)
-			{
-				_perror(arg);
-				_perror(": No such file or directory\n");
-				exit(1);
-			}
+			_perror(arg);
+			_perror(": No such file or directory\n");
+			exit(1);
 		}
-		else if (pid > 0)
-			waitpid(pid, &status, WUNTRACED);
-		else if (pid < 0)
-			_perror("failed to fork\n");
 	}
-	free(path);
+	else if (pid > 0)
+		waitpid(pid, &status, WUNTRACED);
+	else if (pid < 0)
+		_perror("failed to fork\n");
 }
 /**
  * search_path - search for command path
