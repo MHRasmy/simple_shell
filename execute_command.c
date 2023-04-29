@@ -4,13 +4,13 @@
  * execute_command - function to execute command
  * @args: arguments
  * @env: environment variables
+ * @arg: pointer to the name of the program
  * Return: 0 on success and 1 on failure
  */
-void execute_command(char **args, char **env __attribute__((unused)), char *arg)
+void execute_command(char **args, char **env, char *arg)
 {
-	int i = 0;
-	pid_t pid;
 	int status;
+	pid_t pid;
 	char *path;
 
 	if (_strcmp(args[0], "cd") == 0)
@@ -18,38 +18,12 @@ void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 		_cd(args);
 		return;
 	}
-
-	if (strcmp(args[0], "setenv") == 0)
+	else if (strcmp(args[0], "env") == 0)
 	{
-		if (args[1] == NULL || args[2] == NULL)
-		{
-			fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
-			exit(1);
-		}
-		if (set_env(args[1], args[2]) == -1)
-		{
-			fprintf(stderr, "Failed to set environment variable\n");
-			exit(1);
-		}
+		env_shell();
 		return;
 	}
-	else if (strcmp(args[0], "unsetenv") == 0)
-	{
-		if (args[1] == NULL)
-		{
-			fprintf(stderr, "Usage: unsetenv VARIABLE\n");
-			exit(1);
-		}
-		if (unset_env(args[1]) == -1)
-		{
-			fprintf(stderr, "Failed to unset environment variable\n");
-			exit(1);
-		}
-		return;
-	}
-
 	pid = fork();
-
 	path = search_path(args[0]);
 	if (access(path, X_OK) == 0)
 	{
@@ -63,23 +37,28 @@ void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 			}
 		}
 		else if (pid > 0)
-		{
 			waitpid(pid, &status, WUNTRACED);
-		}
 		else if (pid < 0)
 			_perror("failed to fork\n");
 	}
 	free(path);
 }
-
-char* search_path(char *filename) {
+/**
+ * search_path - search for command path
+ * @filename: pointer to string to search for
+ *
+ * Return: pointer to string of path
+ */
+char *search_path(char *filename)
+{
 	char *path, *path_env, *full_path;
+
 	if (filename[0] == '/')
 	{
 		if (access(filename, F_OK) == 0)
-			return realpath(filename, NULL);
+			return (realpath(filename, NULL));
 		else
-			return NULL;
+			return (NULL);
 	}
 
 	path_env = malloc(MAX_PATH_LEN * sizeof(char));
@@ -93,12 +72,12 @@ char* search_path(char *filename) {
 		if (access(full_path, F_OK) == 0)
 		{
 			free(path_env);
-			return realpath(full_path, NULL);
+			return (realpath(full_path, NULL));
 		}
 		path = strtok(NULL, ":");
 	}
 
 	free(path_env);
 	free(full_path);
-	return NULL;
+	return (NULL);
 }

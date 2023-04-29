@@ -1,16 +1,6 @@
 #include "shell.h"
 
 /**
- * init_builtins - initializes an array of built-in commands
- *
- * Return: the size
- */
-int builtins_size()
-{
-	return sizeof(builtins) / sizeof(struct builtin);
-}
-
-/**
  * my_exit - exit
  */
 void my_exit(void)
@@ -36,12 +26,10 @@ void _cd(char **args)
 
 /**
  * env_shell - print the current environment
- * @env: Array of environment variables
  * Return: Nothing
  */
 void env_shell(void)
 {
-	char **environ;
 	int i = 0;
 
 	while (environ[i] != NULL)
