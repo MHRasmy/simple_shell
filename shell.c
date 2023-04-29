@@ -8,9 +8,9 @@
  * Return: Always EXIT_SUCCESS
  */
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
 	if (argc == 1)
-		prompt(argv, env);
+		prompt(argv);
 	return (EXIT_SUCCESS);
 }
