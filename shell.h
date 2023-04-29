@@ -11,6 +11,8 @@
 
 #define PROMPT "#cisfun$ "
 #define MAX_CMD 10
+#define MAX_PATH_LEN 1024
+
 /**
  * struct builtin - struct to hold built-in command
  * name and function pointer
@@ -57,4 +59,5 @@ int _perror(char *err);
 
 /* free functions */
 void _free(char **buf);
+char* search_path(char *filename);
 #endif
