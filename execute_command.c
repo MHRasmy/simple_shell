@@ -13,13 +13,10 @@ void execute_command(char **args, char **env __attribute__((unused)), char *arg)
 	int status;
 	char *path;
 
-	for (i = 0; i < builtins_size(); i++)
+	if (_strcmp(args[0], "cd") == 0)
 	{
-		if (_strcmp(args[0], builtins[i].name) == 0)
-		{
-			builtins[i].func(args);
-			return;
-		}
+		_cd(args);
+		return;
 	}
 
 	if (strcmp(args[0], "setenv") == 0)
