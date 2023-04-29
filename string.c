@@ -1,5 +1,42 @@
 #include "shell.h"
 
+/**
+ * _strtok - Tokenizes a string based on a delimiter character
+ *
+ * @s: The string to tokenize
+ * @d: The delimiter character
+ *
+ * Return: A pointer to the current token, or NULL if there are no more tokens
+ */
+char *_strtok(char *s, char d)
+{
+	static char *input = NULL;
+	char *result;
+	int i = 0;
+	
+	if (s != NULL)
+		input = s;
+
+	if (input == NULL)
+		return NULL;
+
+	result = malloc(strlen(input) + 1);
+
+	for (; input[i] != '\0'; i++) {
+		if (input[i] != d)
+			result[i] = input[i];
+		else {
+			result[i] = '\0';
+			input = input + i + 1;
+			return result;
+		}
+	}
+
+	result[i] = '\0';
+	input = NULL;
+
+	return result;
+}
 
 /**
  * _strlen - returns the length of a string

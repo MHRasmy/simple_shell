@@ -17,7 +17,12 @@ void prompt(char **argv __attribute__((unused)), char **env)
 		tokens = tokenize(line);
 
 		if (tokens[0] != NULL)
-			execute_command(tokens, env, argv[0]);
+		{
+			if (strcmp(tokens[0], "env") == 0)
+				env_shell(env);
+			else
+				execute_command(tokens, env, argv[0]);
+		}
 		free(tokens);
 		free(line);
 	}
