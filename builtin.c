@@ -9,7 +9,6 @@
   {
   */
 builtin_t builtins[] = {
-	{"exit", my_exit},
 	{"cd", _cd},
 };
 /*	return builtins;
@@ -20,9 +19,8 @@ int builtins_size()
 	return sizeof(builtins) / sizeof(struct builtin);
 }
 
-void my_exit(char **args)
+void my_exit(void)
 {
-	free(args);
 	exit(0);
 }
 
@@ -42,13 +40,13 @@ void _cd(char **args)
  * @env: Array of environment variables
  * Return: Nothing
  */
-void env_shell(char **env)
+void env_shell(void)
 {
 	int i = 0;
 
-	while (env[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		_print(env[i]);
+		_print(environ[i]);
 		_print("\n");
 		i++;
 	}

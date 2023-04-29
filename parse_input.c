@@ -1,15 +1,16 @@
 #include "shell.h"
 
-/** tokenize - take string and parse it into tokens
+/**
+ * tokenize - take string and parse it into tokens
  * @line: string to be tokenized
  *
  * Return: array of strings of tokens
  */
-char** tokenize(char *line)
+char **tokenize(char *line)
 {
 	int len = 0;
 	int capacity = 15;
-	char *delim, *token, **tokens = malloc(capacity * sizeof(char*));
+	char *delim, *token, **tokens = malloc(capacity * sizeof(char *));
 
 	if (!tokens)
 	{
@@ -28,22 +29,22 @@ char** tokenize(char *line)
 		if (len >= capacity)
 		{
 			capacity = (int) (capacity * 1.5);
-			tokens = realloc(tokens, capacity * sizeof(char*));
+			tokens = realloc(tokens, capacity * sizeof(char *));
 		}
 
 		token = strtok(NULL, delim);
 	}
 
 	tokens[len] = NULL;
-	return tokens;
+	return (tokens);
 }
 
 /**
  * read_line - read line from stdin
- * 
+ *
  * Return: strings read
  */
-char* read_line()
+char *read_line()
 {
 	char *line = NULL;
 	size_t buf = 0;
@@ -53,5 +54,5 @@ char* read_line()
 		free(line);
 		exit(1);
 	}
-	return line;
+	return (line);
 }
