@@ -14,6 +14,7 @@
 #define MAX_CMD 10
 #define MAX_PATH_LEN 1024
 #define INPUT_LEN 1024
+#define MAX_LINE_LENGTH 1024
 
 extern char **environ;
 
@@ -63,4 +64,7 @@ char *search_path(char *filename);
 int set_env(char *name, char *value);
 int unset_env(char *name);
 
+/* file commands */
+void run_commands_from_file(const char *filename, char **argv);
+void file_prompt(char *line, char **argv);
 #endif

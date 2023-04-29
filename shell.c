@@ -12,5 +12,7 @@ int main(int argc, char **argv)
 {
 	if (argc == 1)
 		prompt(argv);
+	if (argc == 2)
+		run_commands_from_file(argv[1], argv);
 	return (EXIT_SUCCESS);
 }
