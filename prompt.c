@@ -3,10 +3,9 @@
 /**
  * prompt - function to interpret commands without arguments
  * @argv: arguments vector
- * @env: string array passed as environment
  * Return: void
  */
-void prompt(char **argv __attribute__((unused)), char **env)
+void prompt(char **argv __attribute__((unused)))
 {
 	char line[INPUT_LEN], **tokens, prev, *l, *cmt;
 	int if_quote, is_terminal = isatty(STDIN_FILENO);
