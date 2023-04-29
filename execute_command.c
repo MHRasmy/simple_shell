@@ -3,7 +3,6 @@
 /**
  * execute_command - function to execute command
  * @args: arguments
- * @env: environment variables
  * @arg: pointer to the name of the program
  * Return: 0 on success and 1 on failure
  */
@@ -26,7 +25,7 @@ void execute_command(char **args, char *arg)
 	if (pid == 0)
 	{
 		execvp(args[0], args);
-		if (ENOENT == errno)
+		if (errno == ENOENT)
 		{
 			_perror(arg);
 			_perror(": No such file or directory\n");
