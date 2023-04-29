@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 
 #define PROMPT "#cisfun$ "
 #define MAX_CMD 10

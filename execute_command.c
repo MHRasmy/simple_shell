@@ -25,12 +25,19 @@ void execute_command(char **args, char *arg)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execvp(args[0], args) < 0)
+		execvp(args[0], args);
+		if (ENOENT == errno)
 		{
 			_perror(arg);
 			_perror(": No such file or directory\n");
-			exit(1);
+			exit(127);
 		}
+		else
+		{
+			_perror("Command not found.\n");
+			exit(127);
+		}
+
 	}
 	else if (pid > 0)
 		waitpid(pid, &status, WUNTRACED);
