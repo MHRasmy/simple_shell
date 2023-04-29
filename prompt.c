@@ -44,7 +44,7 @@ void prompt(char **argv __attribute__((unused)), char **env)
 				free(tokens);
 				return;
 			}
-			execute_command(tokens, env, argv[0]);
+			execute_command(tokens, argv[0]);
 		}
 		free(tokens);
 	}
