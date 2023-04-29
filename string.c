@@ -10,32 +10,34 @@
  */
 char *_strtok(char *s, char d)
 {
-	static char *input = NULL;
+	char *input = NULL;
 	char *result;
 	int i = 0;
-	
+
 	if (s != NULL)
 		input = s;
 
 	if (input == NULL)
-		return NULL;
+		return (NULL);
 
 	result = malloc(strlen(input) + 1);
 
-	for (; input[i] != '\0'; i++) {
+	for (; input[i] != '\0'; i++)
+	{
 		if (input[i] != d)
 			result[i] = input[i];
-		else {
+		else
+		{
 			result[i] = '\0';
 			input = input + i + 1;
-			return result;
+			return (result);
 		}
 	}
 
 	result[i] = '\0';
 	input = NULL;
 
-	return result;
+	return (result);
 }
 
 /**
