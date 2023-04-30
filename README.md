@@ -95,4 +95,4 @@ Contributions to the Simple Shell project are welcome! To contribute, please fol
 This Simple Shell project was developed by:
 
 - [Mohamed Rasmy](https://github.com/MHRasmy)
-
+- [Denis Akushode](https://github.com/Delonix77)
