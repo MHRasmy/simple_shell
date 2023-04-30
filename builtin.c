@@ -7,6 +7,17 @@ void my_exit(void)
 {
 	exit(EXIT_SUCCESS);
 }
+/**
+ * my_exit_status - exit
+ * @args: array of strings of arguments
+ * Return: void
+ */
+void my_exit_status(char **args)
+{
+	int status = atoi(args[1]);
+	free(args);
+	exit(status);
+}
 
 /**
  * _cd - changes the current working directory

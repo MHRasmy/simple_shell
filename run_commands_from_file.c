@@ -65,6 +65,10 @@ void file_prompt(char *line, char **argv)
 	{
 		if (strcmp(tokens[0], "exit") == 0)
 		{
+			if (tokens[1] != NULL)
+			{
+				my_exit_status(tokens);
+			}
 			free(tokens);
 			my_exit();
 		}
