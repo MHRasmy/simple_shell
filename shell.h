@@ -35,11 +35,11 @@ extern builtin_t builtins[];
 
 /* buitlins functions */
 void my_exit(void);
+void my_exit_status(char **args);
 void _cd(char **args);
 void env_shell(void);
 
 /* executing functions */
-int mul(int num1, int num2);
 void prompt(char **argv);
 void execute_command(char **args, char *arg);
 
