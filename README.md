@@ -84,10 +84,10 @@ Note that this shell doesn't support pipeline redirection.
 Contributions to the Simple Shell project are welcome! To contribute, please follow these steps:
 
 1. Fork the repository.
-2. Create a new branch with your changes: `git checkout -b my-branch`
+2. Create a new branch with your changes: `git checkout -b <branch-name>`
 3. Make your changes and test them thoroughly.
 4. Commit your changes: `git commit -m "my commit message"`
-5. Push your changes to your fork: `git push origin my-branch`
+5. Push your changes to your fork: `git push origin <branch-name>`
 6. Create a pull request for your changes.
 
 ## Authors
