@@ -6,7 +6,6 @@
 - [Usage](#usage)
 - [Files](#files)
 - [Contributing](#contributing)
-- [Authors](#authors)
 
 # Simple Shell Project
 
@@ -90,9 +89,3 @@ Contributions to the Simple Shell project are welcome! To contribute, please fol
 5. Push your changes to your fork: `git push origin <branch-name>`
 6. Create a pull request for your changes.
 
-## Authors
-
-This Simple Shell project was developed by:
-
-- [Mohamed Rasmy](https://github.com/MHRasmy)
-- [Denis Akushode](https://github.com/Delonix77)
