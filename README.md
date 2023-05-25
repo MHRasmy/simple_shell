@@ -9,7 +9,7 @@
 
 # Simple Shell Project
 
-This is a simple UNIX command interpreter that can execute commands both interactively and from a file. This project was created as part of a programming assignment for the Holberton School's curriculum.
+This is a simple UNIX command interpreter that can execute commands both interactively and from a file.
 
 ## Installation
 
